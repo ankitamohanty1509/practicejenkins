@@ -8,7 +8,8 @@ pipeline {
       }
        stage("Installed") {
         steps {
-          sh "python3 -m venv venv"
+          sh "apt install python3.12-venv
+"
     }
   }
       stage("status") {
