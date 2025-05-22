@@ -12,7 +12,7 @@ pipeline {
           apt update 
           apt install -y python3.12-venv 
           apt install -y groovy 
-          apt install -y openjdk-12-jdk maven
+          apt install -y openjdk-17-jdk maven
           """
     }
   }
