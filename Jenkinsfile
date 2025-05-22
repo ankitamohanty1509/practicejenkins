@@ -6,16 +6,20 @@ pipeline {
           git url : "https://github.com/ankitamohanty1509/practicejenkins.git" , branch:"main"
         }
       }
-    }
-      stage("Installed") {
+       stage("Installed") {
         script {
           sh "python3 -m venv venv"
     }
   }
-     stage("status") {
+      stage("status") {
        echo "successfull"
   }
 }
+}
+
+
+  
+  
 
 
 
