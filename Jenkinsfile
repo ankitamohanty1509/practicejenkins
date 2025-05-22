@@ -7,12 +7,13 @@ pipeline {
         }
       }
     }
-  stage ("Installed ") {
-    script {
-      sh "python3.venv venv"
+      stage ("Installed") {
+        script {
+          sh "python3 -m venv venv"
     }
   }
-  }
+}
+
 
 
        
