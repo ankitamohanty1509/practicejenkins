@@ -8,10 +8,11 @@ pipeline {
       }
        stage("Installed") {
         steps {
-          sh "apt update && apt install -y python3.12-venv" 
-          sh "apt install -y groovy"
-          sh "apt install -y openjdk-12 jdk"
-          sh "apt install -y maven"
+          sh """apt update 
+          apt install -y python3.12-venv 
+          apt install -y groovy 
+          apt install -y openjdk-12 jdk 
+          apt install -y maven"""
     }
   }
       stage("Docker build") {
