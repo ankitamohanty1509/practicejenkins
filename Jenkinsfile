@@ -12,8 +12,8 @@ pipeline {
           sh "python3 -m venv venv"
     }
   }
-  stage("status") {
-    echo "successfull"
+     stage("status") {
+       echo "successfull"
   }
 }
 
