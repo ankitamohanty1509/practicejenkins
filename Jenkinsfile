@@ -12,10 +12,13 @@ pipeline {
     }
   }
       stage("status") {
-       echo "successfull"
-  }
+        steps {
+          echo "successfull"
+        }
+      }
+    }
 }
-}
+
 
 
   
