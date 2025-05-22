@@ -13,12 +13,12 @@ pipeline {
     }
   }
       stage("Docker build") {
-        script {
+        steps {
           sh "docker build -t hello-world ."
         }
       }
       stage("run container") {
-        script {
+        steps {
           sh "docker run hello-world"
         }
       }
