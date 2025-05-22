@@ -12,6 +12,16 @@ pipeline {
           sh "apt install python3.12-venv"
     }
   }
+      stage("Docker build") {
+        script {
+          sh "docker build -t hello-world ."
+        }
+      }
+      stage("run container") {
+        script {
+          sh "docker run hello-world"
+        }
+      }
       stage("status") {
         steps {
           echo "successfull"
