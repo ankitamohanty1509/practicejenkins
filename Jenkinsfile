@@ -7,7 +7,7 @@ pipeline {
         }
       }
        stage("Installed") {
-        script {
+        steps {
           sh "python3 -m venv venv"
     }
   }
