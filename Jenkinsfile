@@ -6,6 +6,10 @@ pipeline {
           git url : "https://github.com/ankitamohanty1509/practicejenkins.git" , branch:"main"
         }
       }
+       environment {
+        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+    }
        stage("Installed") {
         steps {
           sh """
