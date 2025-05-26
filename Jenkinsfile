@@ -1,7 +1,7 @@
 pipeline {
   agent any {
     environment {
-      Image-Name = "ankitamohanty1509/simpleapp"
+      Image_Name = "ankitamohanty1509/simpleapp"
       Docker-Credentials = credentials("docker-credentials")
     }
     stages {
@@ -24,20 +24,20 @@ pipeline {
       }
       stage ("Docker Build") { 
         steps {
-          sh "docker build -t $Image-Name: latest ."
+          sh "docker build -t $Image_Name:latest ."
         }
        }
       stage ("Docker Push") {
         steps {
           sh '''
           echo "$Docker-Credentials-PWD | docker login -u $Docker-Credentials-USR --password-stdin"
-          docker push $Image-name:latest
+          docker push $Image_name:latest
           '''
         }
       }
       stage ("Docker run")
         steps {
-          sh "docker run -d --name $Image-name -p 8080:80 $Iamge-name:latest"
+          sh "docker run -d --name $Image_name -p 8080:80 $Iamge-name:latest"
         }
       }
     }
