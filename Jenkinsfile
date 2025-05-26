@@ -1,44 +1,60 @@
 pipeline {
-  agent any 
-  environment {
-        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+  agent any {
+    environment {
+      Image-Name = "ankitamohanty1509/simpleapp"
+      Docker-Credentials = credentials("docker-credentials")
     }
     stages {
-      stage ("Checkout") {
+      stage ("checkout") {
         steps {
-          git url : "https://github.com/ankitamohanty1509/practicejenkins.git" , branch:"main"
+          git url: "https://github.com/ankitamohanty1509/practicejenkins.git" , branch: "main"
+      }
+      stage ("Install tools") {
+        steps {
+          sh ''' 
+          apt-get update 
+          apt install -y maven 
+          apt install -y python3 python3-venv
+          apt install -y openjdk-17-jdk
+          java --version
+          python3 --version
+          mvn --version
+          '''
         }
       }
-       stage("Installed") {
+      stage ("Docker Build") { 
         steps {
-          sh """
-          apt update 
-          apt install -y python3.12-venv 
-          apt install -y groovy 
-          apt install -y openjdk-17-jdk maven
-          """
+          sh "docker build -t $Image-Name: latest ."
+        }
+       }
+      stage ("Docker Push") {
+        steps {
+          sh '''
+          echo "$Docker-Credentials-PWD | docker login -u $Docker-Credentials-USR --password-stdin"
+          docker push $Image-name:latest
+          '''
+        }
+      }
+      stage ("Docker run")
+        steps {
+          sh "docker run -d --name $Image-name -p 8080:80 $Iamge-name:latest"
+        }
+      }
     }
-  }
-      stage("Docker build") {
-        steps {
-          sh "docker build -t hello-world ."
-        }
-      }
-      stage("run container") {
-        steps {
-          sh "docker run hello-world"
-        }
-      }
-      stage("status") {
-        steps {
+      post {
+        success {
           echo "successfull"
         }
+        failed {
+          echo "failed"
+        }
       }
     }
-}
-
-
+  }
+      
+            
+        
+      
 
   
   
